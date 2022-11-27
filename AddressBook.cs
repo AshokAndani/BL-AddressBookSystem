@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Threading;
 
 namespace AddressBookSystem
 {
-     class AddressBook
+     public class AddressBook
     {
+        public string AddressBookName;
         List<Contact> contacts;
-        public AddressBook()
+        public AddressBook(string addressBookName)
         {
             contacts = new List<Contact>();
+            AddressBookName = addressBookName;
         }
         public void AddContact()
         {
@@ -92,6 +95,47 @@ namespace AddressBookSystem
             }
             Console.WriteLine("there is not contact with given FirstName");
             return ;
+        }
+        public override string ToString()
+        {
+            var listofContacts = "";
+            foreach (var contact in contacts)
+            {
+                listofContacts+=contact.ToString();
+            }
+            return @$"AddressBookName: {this.AddressBookName}\n
+            {listofContacts}";
+        }
+        public void DislpayContacts()
+        {
+            Console.WriteLine("Enter P for particular Contact or F for full list of contacts");
+            char ch = Console.ReadLine().ToUpper()[0];
+            switch (ch)
+            {
+                case 'P':
+                    Console.WriteLine("Enter the Fname to print the contact:");
+                    string fname = Console.ReadLine();
+                    foreach (var contact in contacts)
+                    {
+                        if (contact.FirstName.Equals(fname))
+                        {
+                            Console.WriteLine(contact.ToString());
+                        }
+                    }
+                    Thread.Sleep(10000);
+                    return;
+                case 'F':
+                    var listContacts = "";
+                    foreach(var contact in contacts)
+                    {
+                        listContacts+=contact.ToString();
+                    }
+                    Console.WriteLine(listContacts+"\n\nPress any key to exit");
+                    Console.ReadKey();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

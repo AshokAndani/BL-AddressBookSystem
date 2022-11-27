@@ -7,26 +7,24 @@ namespace AddressBookSystem
     {
         static void Main(string[] args)
         {
-            AddressBook addressBook = new AddressBook();
-            while (true)
+            AddressBookManagement addressBookManagement = new AddressBookManagement();
+           while (true)
             {
-                Console.WriteLine("Enter A to Add new contact\nEnter E to edit a contact\nEnter D to Delete a Contact");
-                char ch = Console.ReadLine().ToUpper()[0];
-                switch (ch)
+                Console.WriteLine("Enter O to open an AddressBook\nEnter C to create an AddressBook");
+                char input = Console.ReadLine().ToUpper()[0];
+                switch (input)
                 {
-                    case 'A':
-                        addressBook.AddContact();
+                    case 'O':
+                        addressBookManagement.OpenAddressBook();
                         break;
-                    case 'E':
-                        addressBook.EditContact();
-                        break;
-                    case 'D':
-                        addressBook.DeleteContact();
+                    case 'C':
+                        addressBookManagement.CreateAddressBook();
                         break;
                     default:
+                        Console.WriteLine("Invalid Entry try again");
                         break;
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 Console.Clear();
             }
         }
