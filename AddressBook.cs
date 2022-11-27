@@ -13,6 +13,12 @@ namespace AddressBookSystem
         }
         public void AddContact()
         {
+            Contact contact = TakeInputsForContact();
+            this.contacts.Add(contact);
+            Console.WriteLine("Contact added Sucesfully...!");
+        }
+        public Contact TakeInputsForContact()
+        {
             Console.Write("Enter FirstName: ");
             string firstName = Console.ReadLine();
             Console.Write("Enter lastName: ");
@@ -40,8 +46,35 @@ namespace AddressBookSystem
                 Address = address,
                 Email = email
             };
-            this.contacts.Add(contact);
-            Console.WriteLine("Contact added Sucesfully...!");
+            return contact;
+        }
+        public void EditContact()
+        {
+            Console.WriteLine("Enter the FistName of the contact to edit that contact");
+            string fName=Console.ReadLine();
+            Contact contact = null;
+            foreach(var con in contacts)
+            {
+                if (con.FirstName.Equals(fName))
+                {
+                    contact = con; break;
+                }
+            }
+            if(contact == null)
+            {
+                Console.WriteLine("there is no contact with given FirstName...!");
+                return;
+            }
+            contact = TakeInputsForContact();
+            for(int i = 0; i < contacts.Count; i++)
+            {
+                if (contacts[i].FirstName.Equals(fName))
+                {
+                    contacts[i] = contact; break;
+                }
+            }
+            Console.WriteLine("Contact Edited successfully");
+            return;
         }
     }
 }
