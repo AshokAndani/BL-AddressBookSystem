@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace AddressBookSystem
@@ -75,6 +76,22 @@ namespace AddressBookSystem
             }
             Console.WriteLine("Contact Edited successfully");
             return;
+        }
+        public void DeleteContact()
+        {
+            Console.WriteLine("Enter the FirstName of the contact to Delete");
+            string fname = Console.ReadLine();
+            for (int i = 0; i < contacts.Count; i++)
+            {
+                if (contacts[i].FirstName.Equals(fname))
+                {
+                    contacts.RemoveAt(i);
+                    Console.WriteLine("Contact deleted Successfully");
+                    return;
+                }
+            }
+            Console.WriteLine("there is not contact with given FirstName");
+            return ;
         }
     }
 }
